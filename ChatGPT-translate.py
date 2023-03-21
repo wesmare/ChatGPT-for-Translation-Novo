@@ -81,7 +81,7 @@ class ChatGPT:
 
 
 def translate_text_file(text_filepath_or_url, options):
-    OPENAI_API_KEY = options.openai_key or os.environ.get("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")
+    OPENAI_API_KEY = options.openai_key or os.environ.get("OPEN_API_KEY")
     translator = ChatGPT(OPENAI_API_KEY, options.target_language,
                          options.not_to_translate_people_names)
 
@@ -271,7 +271,7 @@ def parse_arguments():
     )
 
     options = parser.parse_args()
-    OPENAI_API_KEY = options.openai_key or os.environ.get("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")
+    OPENAI_API_KEY = options.openai_key or os.environ.get("OPEN_API_KEY")
     if not OPENAI_API_KEY:
         raise Exception("Please provide your OpenAI API key")
     return options
