@@ -54,7 +54,7 @@ class ChatGPT:
                         model="gpt-3.5-turbo",
                         messages=[{
                             'role': 'system',
-                            'content': 'You are a translator assistant.'
+                            'content': 'You are a translator assistant who is expertly fluent in both English and Spanish, and are a native speaker of both languages.'
                         }, {
                             "role":
                             "user",
@@ -81,7 +81,7 @@ class ChatGPT:
 
 
 def translate_text_file(text_filepath_or_url, options):
-    OPENAI_API_KEY = options.openai_key or os.environ.get("OPENAI_API_KEY")
+    OPENAI_API_KEY = options.openai_key or os.environ.get("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")
     translator = ChatGPT(OPENAI_API_KEY, options.target_language,
                          options.not_to_translate_people_names)
 
@@ -118,7 +118,7 @@ def translate_text_file(text_filepath_or_url, options):
         from nltk.tokenize import sent_tokenize
         
         words = paragraph.split()
-        if len(words) > 4000:
+        if len(words) > 10000:
             sentences = sent_tokenize(paragraph)
             half = len(sentences) // 2
             first_half = " ".join(sentences[:half])
@@ -236,7 +236,7 @@ def parse_arguments():
         "--target_language",
         dest="target_language",
         type=str,
-        default="Simplified Chinese",
+        default="Spanish",
         help="target language to translate to",
     )
 
@@ -271,7 +271,7 @@ def parse_arguments():
     )
 
     options = parser.parse_args()
-    OPENAI_API_KEY = options.openai_key or os.environ.get("OPENAI_API_KEY")
+    OPENAI_API_KEY = options.openai_key or os.environ.get("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")
     if not OPENAI_API_KEY:
         raise Exception("Please provide your OpenAI API key")
     return options
